@@ -51,14 +51,20 @@ document.querySelector("#student-form").addEventListener("submit", (e) => {
                  <td>${lastName}</td>
                  <td>${rollNo}</td>
                  <td>
+                 <a href="#" class=" btn btn-primary primary  btn-sm copy">Copy</a>
                  <a href="#" class="btn btn-warning btn-sm edit">Edit</a>
                  <a href="#" class=" btn btn-danger danger  btn-sm delete">Delete</a>
+                
+
                  </td>
           `;
       list.appendChild(row);
       showAlert("Student Added", "success")
       selectdRow = null;
     }
+
+
+
     else {
       selectdRow.children[0].textContent = firstName;
       selectdRow.children[1].textContent = lastName;
@@ -69,11 +75,27 @@ document.querySelector("#student-form").addEventListener("submit", (e) => {
     clearFields();
 
 
+
   }
 
 
 });
 
+
+//Copy Data 
+
+document.querySelector("#student-list").addEventListener("click", (e) => {
+  target = e.target;
+  const list = document.querySelector("#student-list");
+
+  if (target.classList.contains("copy")) {
+    selectdRow = target.parentElement.parentElement;
+    const clone = selectdRow.cloneNode(true);
+    list.appendChild(clone);
+    showAlert("Successfully copy created!", "success")
+    selectdRow = null;
+  }
+})
 //Edit Data 
 
 document.querySelector("#student-list").addEventListener("click", (e) => {
@@ -95,3 +117,5 @@ document.querySelector("#student-list").addEventListener("click", (e) => {
     showAlert("Student Data Deleted", "danger")
   }
 })
+
+
